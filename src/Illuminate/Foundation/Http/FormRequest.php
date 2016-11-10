@@ -2,17 +2,17 @@
 
 namespace Illuminate\Foundation\Http;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Container\Container;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Contracts\Validation\ValidatesWhenResolved;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exception\HttpResponseException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Validation\ValidatesWhenResolvedTrait;
-use Illuminate\Contracts\Validation\ValidatesWhenResolved;
-use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Validation\ValidationException;
 
 class FormRequest extends Request implements ValidatesWhenResolved
 {
@@ -109,10 +109,11 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
-     * @return void
+     * @param \Illuminate\Contracts\Validation\Validator $validator
      *
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @return void
      */
     protected function failedValidation(Validator $validator)
     {
@@ -138,9 +139,9 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Handle a failed authorization attempt.
      *
-     * @return void
-     *
      * @throws \Illuminate\Http\Exception\HttpResponseException
+     *
+     * @return void
      */
     protected function failedAuthorization()
     {
@@ -150,7 +151,8 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Get the proper failed validation response for the request.
      *
-     * @param  array  $errors
+     * @param array $errors
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function response(array $errors)
@@ -177,7 +179,8 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Format the errors from the given Validator instance.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @param \Illuminate\Contracts\Validation\Validator $validator
+     *
      * @return array
      */
     protected function formatErrors(Validator $validator)
@@ -208,7 +211,8 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Set the Redirector instance.
      *
-     * @param  \Illuminate\Routing\Redirector  $redirector
+     * @param \Illuminate\Routing\Redirector $redirector
+     *
      * @return $this
      */
     public function setRedirector(Redirector $redirector)
@@ -221,7 +225,8 @@ class FormRequest extends Request implements ValidatesWhenResolved
     /**
      * Set the container implementation.
      *
-     * @param  \Illuminate\Container\Container  $container
+     * @param \Illuminate\Container\Container $container
+     *
      * @return $this
      */
     public function setContainer(Container $container)
